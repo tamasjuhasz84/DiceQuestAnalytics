@@ -1,0 +1,660 @@
+id: dicequest_black_tower
+version: 0.1.0
+start_scene: intro_01
+default_language: hu
+supported_languages:
+  - hu
+  - en
+
+scenes:
+  intro_01:
+    type: normal
+    title_key: intro_01.title
+    text_key: intro_01.text
+    analytics:
+      tag: intro
+      difficulty: 1
+    choices:
+      - id: enter_gate
+        label_key: choice.enter_gate
+        next_scene: intro_02
+      - id: go_around
+        label_key: choice.go_around
+        next_scene: intro_03
+      - id: leave
+        label_key: choice.leave
+        next_scene: death_coward
+
+  intro_02:
+    type: normal
+    title_key: intro_02.title
+    text_key: intro_02.text
+    analytics:
+      tag: decision
+      difficulty: 1
+    choices:
+      - id: take_stairs
+        label_key: choice.take_stairs
+        next_scene: intro_05
+      - id: dark_corridor
+        label_key: choice.dark_corridor
+        next_scene: str_01
+
+  intro_03:
+    type: dice_check
+    title_key: intro_03.title
+    text_key: intro_03.text
+    dice_check:
+      dice: d20
+      success_threshold: 11
+      success_scene: luck_01
+      fail_scene: death_trap_01
+      reason: hidden_pit
+    analytics:
+      tag: dice
+      difficulty: 2
+
+  intro_04:
+    type: skill_check
+    title_key: intro_04.title
+    text_key: intro_04.text
+    skill_check:
+      skill: intelligence
+      dice: d20
+      modifier: 2
+      success_threshold: 12
+      success_scene: int_01
+      fail_scene: intro_02
+      reason: hidden_entrance
+    analytics:
+      tag: skill
+      difficulty: 2
+
+  intro_05:
+    type: normal
+    title_key: intro_05.title
+    text_key: intro_05.text
+    analytics:
+      tag: main_branch
+      difficulty: 1
+    choices:
+      - id: strength_path
+        label_key: choice.strength_path
+        next_scene: str_01
+      - id: intelligence_path
+        label_key: choice.intelligence_path
+        next_scene: int_01
+      - id: luck_path
+        label_key: choice.luck_path
+        next_scene: luck_01
+
+  str_01:
+    type: item
+    title_key: str_01.title
+    text_key: str_01.text
+    effects:
+      - add_item: sword
+      - increase_stat:
+          stat: attack
+          amount: 2
+    next_scene: str_02
+    analytics:
+      tag: item
+      path: strength
+      difficulty: 1
+
+  str_02:
+    type: combat
+    title_key: str_02.title
+    text_key: str_02.text
+    enemy:
+      id: goblin_guard
+      name_key: enemy.goblin_guard
+      hp: 8
+      attack: 3
+      defense: 1
+    combat:
+      win_scene: str_03
+      lose_scene: death_combat_01
+    analytics:
+      tag: combat
+      path: strength
+      difficulty: 2
+
+  str_03:
+    type: dice_check
+    title_key: str_03.title
+    text_key: str_03.text
+    dice_check:
+      dice: d20
+      success_threshold: 10
+      success_scene: str_04
+      fail_scene: death_trap_02
+      reason: blade_trap
+    analytics:
+      tag: trap
+      path: strength
+      difficulty: 2
+
+  str_04:
+    type: combat
+    title_key: str_04.title
+    text_key: str_04.text
+    enemy:
+      id: bone_keeper
+      name_key: enemy.bone_keeper
+      hp: 12
+      attack: 4
+      defense: 2
+    combat:
+      win_scene: str_05
+      lose_scene: death_combat_02
+    analytics:
+      tag: combat
+      path: strength
+      difficulty: 3
+
+  str_05:
+    type: heal
+    title_key: str_05.title
+    text_key: str_05.text
+    effects:
+      - heal:
+          amount: 5
+    next_scene: str_06
+    analytics:
+      tag: heal
+      path: strength
+      difficulty: 1
+
+  str_06:
+    type: normal
+    title_key: str_06.title
+    text_key: str_06.text
+    choices:
+      - id: left_door
+        label_key: choice.left_door
+        next_scene: str_07
+      - id: right_door
+        label_key: choice.right_door
+        next_scene: death_trap_03
+    analytics:
+      tag: decision
+      path: strength
+      difficulty: 2
+
+  str_07:
+    type: combat
+    title_key: str_07.title
+    text_key: str_07.text
+    enemy:
+      id: iron_hound
+      name_key: enemy.iron_hound
+      hp: 16
+      attack: 5
+      defense: 3
+    combat:
+      win_scene: str_08
+      lose_scene: death_combat_03
+    analytics:
+      tag: boss
+      path: strength
+      difficulty: 4
+
+  str_08:
+    type: normal
+    title_key: str_08.title
+    text_key: str_08.text
+    choices:
+      - id: climb_final_stairs
+        label_key: choice.climb_final_stairs
+        next_scene: final_01
+    analytics:
+      tag: transition
+      path: strength
+      difficulty: 1
+
+  int_01:
+    type: item
+    title_key: int_01.title
+    text_key: int_01.text
+    effects:
+      - add_item: ancient_book
+      - increase_stat:
+          stat: intelligence
+          amount: 2
+    next_scene: int_02
+    analytics:
+      tag: item
+      path: intelligence
+      difficulty: 1
+
+  int_02:
+    type: skill_check
+    title_key: int_02.title
+    text_key: int_02.text
+    skill_check:
+      skill: intelligence
+      dice: d20
+      modifier: 2
+      success_threshold: 13
+      success_scene: int_03
+      fail_scene: death_puzzle_01
+      reason: rune_riddle
+    analytics:
+      tag: puzzle
+      path: intelligence
+      difficulty: 3
+
+  int_03:
+    type: normal
+    title_key: int_03.title
+    text_key: int_03.text
+    choices:
+      - id: open_secret_door
+        label_key: choice.open_secret_door
+        next_scene: int_04
+    analytics:
+      tag: discovery
+      path: intelligence
+      difficulty: 1
+
+  int_04:
+    type: normal
+    title_key: int_04.title
+    text_key: int_04.text
+    choices:
+      - id: trust_vision
+        label_key: choice.trust_vision
+        next_scene: death_illusion
+      - id: resist_vision
+        label_key: choice.resist_vision
+        next_scene: int_05
+    analytics:
+      tag: decision
+      path: intelligence
+      difficulty: 3
+
+  int_05:
+    type: buff
+    title_key: int_05.title
+    text_key: int_05.text
+    effects:
+      - increase_stat:
+          stat: defense
+          amount: 1
+      - increase_stat:
+          stat: intelligence
+          amount: 1
+    next_scene: int_06
+    analytics:
+      tag: buff
+      path: intelligence
+      difficulty: 1
+
+  int_06:
+    type: skill_check
+    title_key: int_06.title
+    text_key: int_06.text
+    skill_check:
+      skill: intelligence
+      dice: d20
+      modifier: 3
+      success_threshold: 15
+      success_scene: int_07
+      fail_scene: death_puzzle_02
+      reason: logic_gate
+    analytics:
+      tag: puzzle
+      path: intelligence
+      difficulty: 4
+
+  int_07:
+    type: normal
+    title_key: int_07.title
+    text_key: int_07.text
+    choices:
+      - id: take_shortcut
+        label_key: choice.take_shortcut
+        next_scene: int_08
+    analytics:
+      tag: transition
+      path: intelligence
+      difficulty: 1
+
+  int_08:
+    type: normal
+    title_key: int_08.title
+    text_key: int_08.text
+    choices:
+      - id: use_lift
+        label_key: choice.use_lift
+        next_scene: final_01
+    analytics:
+      tag: transition
+      path: intelligence
+      difficulty: 1
+
+  luck_01:
+    type: dice_check
+    title_key: luck_01.title
+    text_key: luck_01.text
+    dice_check:
+      dice: d20
+      success_threshold: 9
+      success_scene: luck_02
+      fail_scene: death_luck_01
+      reason: fate_roll
+    analytics:
+      tag: dice
+      path: luck
+      difficulty: 2
+
+  luck_02:
+    type: random_event
+    title_key: luck_02.title
+    text_key: luck_02.text
+    random_event:
+      outcomes:
+        - id: gold_reward
+          weight: 40
+          next_scene: luck_03
+          effects:
+            - add_item: golden_token
+        - id: healing_reward
+          weight: 35
+          next_scene: luck_03
+          effects:
+            - heal:
+                amount: 4
+        - id: cursed_reward
+          weight: 25
+          next_scene: luck_03
+          effects:
+            - decrease_stat:
+                stat: defense
+                amount: 1
+    analytics:
+      tag: random
+      path: luck
+      difficulty: 2
+
+  luck_03:
+    type: random_event
+    title_key: luck_03.title
+    text_key: luck_03.text
+    random_event:
+      outcomes:
+        - id: enemy
+          weight: 40
+          next_scene: luck_04
+        - id: trap
+          weight: 25
+          next_scene: death_trap_04
+        - id: bonus
+          weight: 35
+          next_scene: luck_05
+          effects:
+            - increase_stat:
+                stat: luck
+                amount: 1
+    analytics:
+      tag: random
+      path: luck
+      difficulty: 3
+
+  luck_04:
+    type: combat
+    title_key: luck_04.title
+    text_key: luck_04.text
+    enemy:
+      id: dice_imp
+      name_key: enemy.dice_imp
+      hp: 10
+      attack: 4
+      defense: 1
+    combat:
+      win_scene: luck_05
+      lose_scene: death_combat_04
+    analytics:
+      tag: combat
+      path: luck
+      difficulty: 3
+
+  luck_05:
+    type: dice_check
+    title_key: luck_05.title
+    text_key: luck_05.text
+    dice_check:
+      dice: d20
+      success_threshold: 12
+      success_scene: luck_06
+      fail_scene: death_luck_02
+      reason: unstable_bridge
+    analytics:
+      tag: dice
+      path: luck
+      difficulty: 3
+
+  luck_06:
+    type: dice_check
+    title_key: luck_06.title
+    text_key: luck_06.text
+    dice_check:
+      dice: d20
+      success_threshold: 8
+      success_scene: luck_07
+      fail_scene: luck_04
+      reason: double_or_nothing
+    analytics:
+      tag: dice
+      path: luck
+      difficulty: 3
+
+  luck_07:
+    type: buff
+    title_key: luck_07.title
+    text_key: luck_07.text
+    effects:
+      - heal:
+          amount: 6
+      - increase_stat:
+          stat: luck
+          amount: 2
+    next_scene: luck_08
+    analytics:
+      tag: reward
+      path: luck
+      difficulty: 1
+
+  luck_08:
+    type: normal
+    title_key: luck_08.title
+    text_key: luck_08.text
+    choices:
+      - id: climb_lucky_stairs
+        label_key: choice.climb_lucky_stairs
+        next_scene: final_01
+    analytics:
+      tag: transition
+      path: luck
+      difficulty: 1
+
+  final_01:
+    type: skill_check
+    title_key: final_01.title
+    text_key: final_01.text
+    skill_check:
+      skill: wisdom
+      dice: d20
+      modifier: 0
+      success_threshold: 14
+      success_scene: final_02
+      fail_scene: ending_bad
+      reason: final_trial
+    analytics:
+      tag: final_trial
+      difficulty: 5
+
+  final_02:
+    type: combat
+    title_key: final_02.title
+    text_key: final_02.text
+    enemy:
+      id: tower_avatar
+      name_key: enemy.tower_avatar
+      hp: 20
+      attack: 6
+      defense: 4
+    combat:
+      win_scene: ending_win
+      lose_scene: ending_bad
+    analytics:
+      tag: final_boss
+      difficulty: 5
+
+  ending_win:
+    type: ending
+    title_key: ending_win.title
+    text_key: ending_win.text
+    ending:
+      result: victory
+    analytics:
+      tag: victory
+      difficulty: 0
+
+  ending_bad:
+    type: ending
+    title_key: ending_bad.title
+    text_key: ending_bad.text
+    ending:
+      result: failure
+    analytics:
+      tag: failure
+      difficulty: 0
+
+  death_coward:
+    type: death
+    title_key: death_coward.title
+    text_key: death_coward.text
+    death_reason: abandoned_quest
+    analytics:
+      tag: death
+      death_type: decision
+
+  death_trap_01:
+    type: death
+    title_key: death_trap_01.title
+    text_key: death_trap_01.text
+    death_reason: hidden_pit
+    analytics:
+      tag: death
+      death_type: trap
+
+  death_trap_02:
+    type: death
+    title_key: death_trap_02.title
+    text_key: death_trap_02.text
+    death_reason: blade_trap
+    analytics:
+      tag: death
+      death_type: trap
+
+  death_trap_03:
+    type: death
+    title_key: death_trap_03.title
+    text_key: death_trap_03.text
+    death_reason: wrong_door
+    analytics:
+      tag: death
+      death_type: decision
+
+  death_trap_04:
+    type: death
+    title_key: death_trap_04.title
+    text_key: death_trap_04.text
+    death_reason: random_trap
+    analytics:
+      tag: death
+      death_type: random
+
+  death_combat_01:
+    type: death
+    title_key: death_combat_01.title
+    text_key: death_combat_01.text
+    death_reason: goblin_guard
+    analytics:
+      tag: death
+      death_type: combat
+
+  death_combat_02:
+    type: death
+    title_key: death_combat_02.title
+    text_key: death_combat_02.text
+    death_reason: bone_keeper
+    analytics:
+      tag: death
+      death_type: combat
+
+  death_combat_03:
+    type: death
+    title_key: death_combat_03.title
+    text_key: death_combat_03.text
+    death_reason: iron_hound
+    analytics:
+      tag: death
+      death_type: combat
+
+  death_combat_04:
+    type: death
+    title_key: death_combat_04.title
+    text_key: death_combat_04.text
+    death_reason: dice_imp
+    analytics:
+      tag: death
+      death_type: combat
+
+  death_puzzle_01:
+    type: death
+    title_key: death_puzzle_01.title
+    text_key: death_puzzle_01.text
+    death_reason: rune_riddle
+    analytics:
+      tag: death
+      death_type: puzzle
+
+  death_puzzle_02:
+    type: death
+    title_key: death_puzzle_02.title
+    text_key: death_puzzle_02.text
+    death_reason: logic_gate
+    analytics:
+      tag: death
+      death_type: puzzle
+
+  death_illusion:
+    type: death
+    title_key: death_illusion.title
+    text_key: death_illusion.text
+    death_reason: false_vision
+    analytics:
+      tag: death
+      death_type: illusion
+
+  death_luck_01:
+    type: death
+    title_key: death_luck_01.title
+    text_key: death_luck_01.text
+    death_reason: bad_fate_roll
+    analytics:
+      tag: death
+      death_type: dice
+
+  death_luck_02:
+    type: death
+    title_key: death_luck_02.title
+    text_key: death_luck_02.text
+    death_reason: unstable_bridge
+    analytics:
+      tag: death
+      death_type: dice

@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# Development tools
+.git/
+.github/
+tests/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Build artifacts
+*.egg-info/
+dist/
+build/
+
+# SQLite database (created at runtime, not baked into image)
+data/*.db
+
+# Environment files
+.env
+.env.*
+!.env.example

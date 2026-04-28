@@ -1,0 +1,213 @@
+intro_01:
+  title: "The Tower Gate"
+  text: "The Black Tower rises before you. The gate stands slightly open, as if inviting you in."
+
+intro_02:
+  title: "Entrance Hall"
+  text: "Inside the dusty hall, two paths lead onward: a staircase going up and a dark corridor to the side."
+
+intro_03:
+  title: "Behind the Tower"
+  text: "You walk around the tower, but the ground is treacherous. One wrong step could be fatal."
+
+intro_04:
+  title: "Hidden Entrance"
+  text: "You discover a hidden door in the wall. It might be a shorter way inside."
+
+intro_05:
+  title: "Crossroads"
+  text: "Three paths stand before you. Each one promises a different kind of trial."
+
+str_01:
+  title: "Armory"
+  text: "Among the rusty weapons, you find a sword that still seems usable."
+
+str_02:
+  title: "Goblin Guard"
+  text: "A growling goblin jumps in front of you and attacks."
+
+str_03:
+  title: "Trapped Corridor"
+  text: "Blades burst from the walls. Only quick reflexes can save you."
+
+str_04:
+  title: "Bone Keeper"
+  text: "An undead skeleton guard blocks your path."
+
+str_05:
+  title: "Resting Spot"
+  text: "In a quiet corner, you can rest and recover your strength."
+
+str_06:
+  title: "Two Doors"
+  text: "Two doors stand before you. One is safe, the other hides death."
+
+str_07:
+  title: "Iron Hound"
+  text: "A mechanical beast attacks you."
+
+str_08:
+  title: "The Way Up"
+  text: "The path to the top of the tower opens before you."
+
+int_01:
+  title: "Library"
+  text: "Among ancient books, one strange volume catches your attention."
+
+int_02:
+  title: "Rune Riddle"
+  text: "Glowing runes on the wall demand logic. A single mistake could be fatal."
+
+int_03:
+  title: "Secret Door"
+  text: "With the help of the book, you open a hidden door."
+
+int_04:
+  title: "Hall of Illusions"
+  text: "Reality begins to waver. Not everything is what it seems."
+
+int_05:
+  title: "Spirit's Advice"
+  text: "An ancient spirit grants you wisdom."
+
+int_06:
+  title: "Logic Trial"
+  text: "A complex mechanism awaits you. You must understand how it works."
+
+int_07:
+  title: "Shortcut"
+  text: "You discover a quick passage toward the upper levels."
+
+int_08:
+  title: "Ancient Lift"
+  text: "An old mechanism still works. It carries you toward the top of the tower."
+
+luck_01:
+  title: "Dice Room"
+  text: "Huge dice lie scattered across the floor. Luck will decide your fate."
+
+luck_02:
+  title: "Golden Chest"
+  text: "You find a chest. Is it a blessing or a curse?"
+
+luck_03:
+  title: "Chaos Room"
+  text: "Anything can happen here."
+
+luck_04:
+  title: "Dice Imp"
+  text: "A strange creature appears, a servant of chance."
+
+luck_05:
+  title: "Unstable Bridge"
+  text: "A narrow bridge stretches across the abyss."
+
+luck_06:
+  title: "Double or Nothing"
+  text: "Will you risk your fate one more time?"
+
+luck_07:
+  title: "Jackpot"
+  text: "Today, luck smiles upon you."
+
+luck_08:
+  title: "Ascent"
+  text: "A staircase leads up to the top of the tower."
+
+final_01:
+  title: "Final Trial"
+  text: "The tower tests your mind and will."
+
+final_02:
+  title: "The Spirit of the Tower"
+  text: "The embodied will of the tower appears before you."
+
+ending_win:
+  title: "Victory"
+  text: "You have claimed the Dice of Fate. The tower bows before you."
+
+ending_bad:
+  title: "Defeat"
+  text: "The tower consumes you. You will never return."
+
+death_coward:
+  title: "Turning Back"
+  text: "You left the tower behind. Your adventure ends here."
+
+death_trap_01:
+  title: "The Fall"
+  text: "The ground opens beneath you. There is no escape."
+
+death_trap_02:
+  title: "Blades"
+  text: "The trap was faster than you."
+
+death_trap_03:
+  title: "Wrong Door"
+  text: "Death waited behind the door."
+
+death_trap_04:
+  title: "Random Trap"
+  text: "Luck has abandoned you this time."
+
+death_combat_01:
+  title: "Defeated by the Goblin"
+  text: "The goblin defeated you."
+
+death_combat_02:
+  title: "Defeated by the Bone Keeper"
+  text: "The skeleton destroyed you."
+
+death_combat_03:
+  title: "Defeated by the Iron Hound"
+  text: "The beast was too strong."
+
+death_combat_04:
+  title: "Defeated by the Dice Imp"
+  text: "Luck was not on your side."
+
+death_puzzle_01:
+  title: "Wrong Answer"
+  text: "The riddle allowed no mistakes."
+
+death_puzzle_02:
+  title: "Logic Error"
+  text: "The mechanism reacted fatally."
+
+death_illusion:
+  title: "Illusion Trap"
+  text: "You fell into the trap of false reality."
+
+death_luck_01:
+  title: "Bad Roll"
+  text: "Fate turned against you."
+
+death_luck_02:
+  title: "The Fall"
+  text: "The bridge could not hold your weight."
+
+choice:
+  enter_gate: "Enter the gate"
+  go_around: "Walk around the tower"
+  leave: "Turn back"
+  take_stairs: "Go up the stairs"
+  dark_corridor: "Take the dark corridor"
+  strength_path: "The path of strength"
+  intelligence_path: "The path of intelligence"
+  luck_path: "The path of luck"
+  left_door: "Left door"
+  right_door: "Right door"
+  climb_final_stairs: "Climb to the top of the tower"
+  open_secret_door: "Open the secret door"
+  trust_vision: "Trust the vision"
+  resist_vision: "Resist"
+  take_shortcut: "Take the shortcut"
+  use_lift: "Use the lift"
+  climb_lucky_stairs: "Climb the stairs"
+
+enemy:
+  goblin_guard: "Goblin Guard"
+  bone_keeper: "Bone Keeper"
+  iron_hound: "Iron Hound"
+  dice_imp: "Dice Imp"
+  tower_avatar: "The Spirit of the Tower"

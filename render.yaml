@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: dicequest-api
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      # Replace with your actual Streamlit Render URL after first deploy.
+      - key: ALLOWED_ORIGINS
+        value: https://dicequest-streamlit.onrender.com
+    # Persistent disk is required if you want SQLite data to survive redeploy/restart.
+    # Note: Render disks are not available on all free tiers.
+    disk:
+      name: dicequest-data
+      mountPath: /app/data
+      sizeGB: 1
+
+  - type: web
+    name: dicequest-streamlit
+    env: docker
+    dockerfilePath: ./Dockerfile.streamlit
+    plan: free
+    envVars:
+      # Replace with your actual API Render URL after first deploy.
+      - key: API_BASE_URL
+        value: https://dicequest-api.onrender.com

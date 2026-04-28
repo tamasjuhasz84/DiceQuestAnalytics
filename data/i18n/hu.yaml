@@ -1,0 +1,213 @@
+intro_01:
+  title: "A torony kapuja"
+  text: "A Fekete Torony előtted magasodik. A kapu résnyire nyitva áll, mintha hívna."
+
+intro_02:
+  title: "Előcsarnok"
+  text: "A poros csarnokban két út vezet tovább: egy lépcső felfelé és egy sötét folyosó oldalra."
+
+intro_03:
+  title: "A torony hátulja"
+  text: "Megkerülöd a tornyot, de a talaj alattomos. Egy rossz lépés végzetes lehet."
+
+intro_04:
+  title: "Rejtett bejárat"
+  text: "Egy rejtett ajtót fedezel fel a falban. Talán ez egy rövidebb út."
+
+intro_05:
+  title: "Elágazás"
+  text: "Három út áll előtted. Mindegyik más próbát ígér."
+
+str_01:
+  title: "Fegyverterem"
+  text: "Rozsdás fegyverek között találsz egy még használható kardot."
+
+str_02:
+  title: "Goblin őr"
+  text: "Egy morgó goblin ugrik eléd, és rád támad."
+
+str_03:
+  title: "Csapdás folyosó"
+  text: "A falakból pengék csapódnak ki. Csak gyorsaság menthet meg."
+
+str_04:
+  title: "Csontőr"
+  text: "Egy élőhalott csontváz őr állja utadat."
+
+str_05:
+  title: "Pihenő"
+  text: "Egy csendes sarokban megpihenhetsz és összeszedheted magad."
+
+str_06:
+  title: "Két ajtó"
+  text: "Két ajtó. Az egyik biztonságos, a másik halált rejt."
+
+str_07:
+  title: "Vasvad"
+  text: "Egy mechanikus bestia támad rád."
+
+str_08:
+  title: "Felfelé vezető út"
+  text: "Megnyílik előtted az út a torony teteje felé."
+
+int_01:
+  title: "Könyvtár"
+  text: "Régi könyvek között egy különös kötet ragadja meg a figyelmed."
+
+int_02:
+  title: "Rúna rejtvény"
+  text: "A falon világító rúnák logikát követelnek. Egy hiba végzetes lehet."
+
+int_03:
+  title: "Titkos ajtó"
+  text: "A könyv segítségével egy rejtett ajtót nyitsz meg."
+
+int_04:
+  title: "Illúzió terem"
+  text: "A valóság meginog. Nem minden az, aminek látszik."
+
+int_05:
+  title: "Szellem tanácsa"
+  text: "Egy ősi szellem bölcsességgel ajándékoz meg."
+
+int_06:
+  title: "Logikai próba"
+  text: "Egy összetett mechanizmus vár rád. Meg kell értened a működését."
+
+int_07:
+  title: "Rövid út"
+  text: "Felfedeztél egy gyors átjárót a felső szintek felé."
+
+int_08:
+  title: "Ősi lift"
+  text: "Egy régi szerkezet még működik. Felvisz a torony tetejére."
+
+luck_01:
+  title: "Kockaterem"
+  text: "A padlón hatalmas kockák hevernek. A szerencse dönt."
+
+luck_02:
+  title: "Arany láda"
+  text: "Egy ládát találsz. Vajon áldás vagy átok?"
+
+luck_03:
+  title: "Káosz szoba"
+  text: "Itt bármi megtörténhet."
+
+luck_04:
+  title: "Kocka démon"
+  text: "Egy furcsa lény jelenik meg, a szerencse szolgája."
+
+luck_05:
+  title: "Instabil híd"
+  text: "Egy keskeny híd vezet át a mélység felett."
+
+luck_06:
+  title: "Dupla vagy semmi"
+  text: "Megkockáztatod a sorsodat még egyszer?"
+
+luck_07:
+  title: "Jackpot"
+  text: "Ma a szerencse rád mosolyog."
+
+luck_08:
+  title: "Feljutás"
+  text: "Egy lépcső vezet fel a torony csúcsára."
+
+final_01:
+  title: "Végső próba"
+  text: "A torony próbára teszi az elmédet és akaratodat."
+
+final_02:
+  title: "A Torony Szelleme"
+  text: "A torony megtestesült akarata jelenik meg előtted."
+
+ending_win:
+  title: "Győzelem"
+  text: "Megszerezted a Sors Kockáját. A torony meghajol előtted."
+
+ending_bad:
+  title: "Bukás"
+  text: "A torony elnyel. Soha többé nem térsz vissza."
+
+death_coward:
+  title: "Visszafordulás"
+  text: "Elhagytad a tornyot. A kaland itt véget ért."
+
+death_trap_01:
+  title: "Zuhanás"
+  text: "A föld megnyílik alattad. Nincs menekvés."
+
+death_trap_02:
+  title: "Pengék"
+  text: "A csapda gyorsabb volt nálad."
+
+death_trap_03:
+  title: "Rossz ajtó"
+  text: "Az ajtó mögött halál várt."
+
+death_trap_04:
+  title: "Véletlen csapda"
+  text: "A szerencse most elhagyott."
+
+death_combat_01:
+  title: "Goblin győzött"
+  text: "A goblin legyőzött."
+
+death_combat_02:
+  title: "Csontőr győzött"
+  text: "A csontváz elpusztított."
+
+death_combat_03:
+  title: "Vasvad győzött"
+  text: "A bestia túl erős volt."
+
+death_combat_04:
+  title: "Kocka démon győzött"
+  text: "A szerencse nem volt veled."
+
+death_puzzle_01:
+  title: "Hibás válasz"
+  text: "A rejtvény hibát nem tűrt."
+
+death_puzzle_02:
+  title: "Logikai hiba"
+  text: "A mechanizmus végzetesen reagált."
+
+death_illusion:
+  title: "Illúzió csapda"
+  text: "A hamis valóság csapdájába estél."
+
+death_luck_01:
+  title: "Rossz dobás"
+  text: "A sors ellened fordult."
+
+death_luck_02:
+  title: "Leesés"
+  text: "A híd nem bírta el a súlyodat."
+
+choice:
+  enter_gate: "Belépek a kapun"
+  go_around: "Megkerülöm a tornyot"
+  leave: "Visszafordulok"
+  take_stairs: "Fel a lépcsőn"
+  dark_corridor: "A sötét folyosó"
+  strength_path: "Az erő útja"
+  intelligence_path: "Az ész útja"
+  luck_path: "A szerencse útja"
+  left_door: "Bal ajtó"
+  right_door: "Jobb ajtó"
+  climb_final_stairs: "Fel a torony tetejére"
+  open_secret_door: "Kinyitom a titkos ajtót"
+  trust_vision: "Hiszek a látomásnak"
+  resist_vision: "Ellenállok"
+  take_shortcut: "Rövidebb utat választok"
+  use_lift: "Használom a liftet"
+  climb_lucky_stairs: "Felmegyek a lépcsőn"
+
+enemy:
+  goblin_guard: "Goblin őr"
+  bone_keeper: "Csontőr"
+  iron_hound: "Vasvad"
+  dice_imp: "Kocka démon"
+  tower_avatar: "A Torony Szelleme"
