@@ -5,18 +5,27 @@ from fastapi.testclient import TestClient
 
 from app.api.main import app
 from app.api.routes.game_routes import sessions
+from app.models.database import get_connection, init_db
 
 
 @pytest.fixture(autouse=True)
 def clear_sessions() -> None:
-    """Ensure each test starts with a clean in-memory session store."""
+    """Ensure each test starts with clean in-memory and SQLite state."""
     sessions.clear()
+    init_db()
+
+    with get_connection() as connection:
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM events")
+        cursor.execute("DELETE FROM sessions")
+        connection.commit()
 
 
 @pytest.fixture
 def client() -> TestClient:
-    """Create test client."""
-    return TestClient(app)
+    """Create test client and run FastAPI lifespan hooks."""
+    with TestClient(app) as test_client:
+        yield test_client
 
 
 def test_health_check(client: TestClient) -> None:
