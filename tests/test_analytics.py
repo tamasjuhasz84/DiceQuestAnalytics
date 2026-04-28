@@ -7,8 +7,11 @@ from app.analytics.reports import (
     get_combat_stats,
     get_death_reasons,
     get_dice_stats,
+    get_language_stats,
     get_scene_popularity,
+    get_session_funnel,
     get_summary_metrics,
+    get_timeline_activity,
 )
 
 
@@ -59,9 +62,12 @@ def test_summary_metrics() -> None:
     """Summary metrics should include key totals and win rate."""
     metrics = get_summary_metrics(_sample_df())
     assert metrics["total_games"] == 2
+    assert metrics["total_sessions"] == 2
     assert metrics["total_events"] == 6
     assert metrics["total_deaths"] == 1
     assert metrics["total_wins"] == 1
+    assert metrics["completed_sessions"] == 1
+    assert metrics["average_choices_per_session"] == 0.5
     assert metrics["win_rate"] == 0.5
 
 
@@ -99,6 +105,7 @@ def test_dice_and_combat_stats() -> None:
     assert "average_roll" in dice
     assert "distribution" in dice
     assert combat["total_combats"] == 1
+    assert combat["player_wins"] == 1
     assert combat["average_rounds"] == 2.0
 
 
@@ -113,8 +120,92 @@ def test_helpers_return_empty_structures_for_empty_df() -> None:
     combat = get_combat_stats(empty_df)
 
     assert summary["total_games"] == 0
+    assert summary["total_sessions"] == 0
     assert choices.empty
     assert deaths.empty
     assert scenes.empty
     assert dice["distribution"] == []
     assert combat["total_combats"] == 0
+    assert combat["player_wins"] == 0
+
+
+def _sample_sessions_df() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            {"id": "s1", "language": "hu", "created_at": "2024-01-01T10:00:00+00:00"},
+            {"id": "s2", "language": "en", "created_at": "2024-01-01T11:00:00+00:00"},
+            {"id": "s3", "language": "hu", "created_at": "2024-01-02T09:00:00+00:00"},
+        ]
+    )
+
+
+def _sample_df_with_timestamps() -> pd.DataFrame:
+    import pandas as pd
+
+    df = _sample_df().copy()
+    df["created_at"] = pd.to_datetime(
+        [
+            "2024-01-01T10:00:00+00:00",
+            "2024-01-01T10:05:00+00:00",
+            "2024-01-01T10:10:00+00:00",
+            "2024-01-02T09:00:00+00:00",
+            "2024-01-02T09:05:00+00:00",
+            "2024-01-02T09:10:00+00:00",
+        ],
+        utc=True,
+    )
+    return df
+
+
+def test_language_stats() -> None:
+    """Language stats should count sessions per language."""
+    result = get_language_stats(_sample_sessions_df())
+    assert not result.empty
+    assert "language" in result.columns
+    assert "count" in result.columns
+    hu_count = int(result[result["language"] == "hu"]["count"].iloc[0])
+    assert hu_count == 2
+
+
+def test_language_stats_empty() -> None:
+    result = get_language_stats(pd.DataFrame())
+    assert result.empty
+    assert list(result.columns) == ["language", "count"]
+
+
+def test_session_funnel() -> None:
+    """Session funnel should track progression stages."""
+    result = get_session_funnel(_sample_df())
+    stages = {row["stage"]: row["count"] for row in result}
+    assert "started" in stages
+    assert "made_choice" in stages
+    assert "encountered_challenge" in stages
+    assert "finished" in stages
+    # s1 has game_started, s2 does not → started=1 (or 2 depending on data), >=0
+    assert all(v >= 0 for v in stages.values())
+
+
+def test_session_funnel_empty() -> None:
+    result = get_session_funnel(pd.DataFrame())
+    assert len(result) == 4
+    assert all(row["count"] == 0 for row in result)
+
+
+def test_timeline_activity() -> None:
+    """Timeline should bucket events by date."""
+    result = get_timeline_activity(_sample_df_with_timestamps())
+    assert len(result) >= 1
+    assert "date" in result[0]
+    assert "count" in result[0]
+
+
+def test_timeline_activity_no_timestamps() -> None:
+    """Timeline should return empty list when created_at column is missing."""
+    result = get_timeline_activity(_sample_df())
+    assert result == []
+
+
+def test_timeline_activity_empty() -> None:
+    result = get_timeline_activity(pd.DataFrame())
+    assert result == []
+

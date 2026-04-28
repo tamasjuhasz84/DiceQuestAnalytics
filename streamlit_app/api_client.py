@@ -109,3 +109,18 @@ def get_analytics_dice() -> dict[str, Any]:
 def get_analytics_combat() -> dict[str, Any]:
     """Fetch combat analytics."""
     return _request("GET", "/analytics/combat")
+
+
+def get_analytics_languages() -> dict[str, Any]:
+    """Fetch language distribution analytics."""
+    return _request("GET", "/analytics/languages")
+
+
+def get_analytics_funnel() -> dict[str, Any]:
+    """Fetch session funnel analytics."""
+    return _request("GET", "/analytics/funnel")
+
+
+def get_analytics_timeline() -> dict[str, Any]:
+    """Fetch daily activity timeline analytics."""
+    return _request("GET", "/analytics/timeline")
