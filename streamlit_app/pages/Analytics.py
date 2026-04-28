@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import pandas as pd
 import streamlit as st
-
 from api_client import ApiError, get_analytics_combat, get_analytics_deaths, get_analytics_summary
 from i18n import render_language_selector, t
 

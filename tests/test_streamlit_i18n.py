@@ -16,8 +16,16 @@ def _collect_used_translation_keys() -> set[str]:
     for path in Path("streamlit_app").rglob("*.py"):
         tree = ast.parse(path.read_text(encoding="utf-8"))
         for node in ast.walk(tree):
-            if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "t":
-                if node.args and isinstance(node.args[0], ast.Constant) and isinstance(node.args[0].value, str):
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "t"
+            ):
+                if (
+                    node.args
+                    and isinstance(node.args[0], ast.Constant)
+                    and isinstance(node.args[0].value, str)
+                ):
                     keys.add(node.args[0].value)
     return keys
 

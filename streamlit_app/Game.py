@@ -7,7 +7,6 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
-
 from api_client import ApiError, get_scene, resolve_scene, start_game, submit_choice
 from i18n import (
     get_combat_column_map,
@@ -194,13 +193,21 @@ def _render_check_result(scene: dict[str, Any]) -> None:
     modifier_value = check_result.get("modifier", 0)
     total_value = check_result.get("total")
 
-    if total_value is None and isinstance(roll_value, (int, float)) and isinstance(modifier_value, (int, float)):
+    if (
+        total_value is None
+        and isinstance(roll_value, (int, float))
+        and isinstance(modifier_value, (int, float))
+    ):
         total_value = roll_value + modifier_value
 
     target_value = check_result.get("success_threshold", "-")
     success_value = check_result.get("success")
 
-    if success_value is None and isinstance(total_value, (int, float)) and isinstance(target_value, (int, float)):
+    if (
+        success_value is None
+        and isinstance(total_value, (int, float))
+        and isinstance(target_value, (int, float))
+    ):
         success_value = total_value >= target_value
 
     st.write(f"**{t('dice')}:** {dice_name or '-'}")

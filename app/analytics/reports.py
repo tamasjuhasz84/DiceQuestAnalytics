@@ -96,10 +96,12 @@ def get_death_reasons(df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=["death_reason", "count"])
 
     deaths["death_reason"] = deaths.apply(
-        lambda row: row["data"].get("death_reason")
-        or row["data"].get("reason")
-        or row.get("scene_id")
-        or "unknown",
+        lambda row: (
+            row["data"].get("death_reason")
+            or row["data"].get("reason")
+            or row.get("scene_id")
+            or "unknown"
+        ),
         axis=1,
     )
 
@@ -136,9 +138,7 @@ def get_dice_stats(df: pd.DataFrame) -> dict[str, Any]:
     if checks.empty:
         return {"average_roll": 0.0, "distribution": []}
 
-    checks["roll"] = checks["data"].apply(
-        lambda data: (data.get("check_result") or {}).get("roll")
-    )
+    checks["roll"] = checks["data"].apply(lambda data: (data.get("check_result") or {}).get("roll"))
     checks = checks.dropna(subset=["roll"])
 
     if checks.empty:

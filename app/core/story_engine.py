@@ -1,6 +1,6 @@
 import random
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -43,7 +43,7 @@ class StoryEngine:
         return str(value)
 
     def get_start_scene_id(self) -> str:
-        return self.story["start_scene"]
+        return cast(str, self.story["start_scene"])
 
     def get_scene(self, scene_id: str) -> dict[str, Any]:
         scenes = self.story.get("scenes", {})
@@ -82,9 +82,7 @@ class StoryEngine:
             if choice["id"] == choice_id:
                 return self.get_scene(choice["next_scene"])
 
-        raise ValueError(
-            f"Choice '{choice_id}' not found in scene '{current_scene_id}'"
-        )
+        raise ValueError(f"Choice '{choice_id}' not found in scene '{current_scene_id}'")
 
     def resolve_scene(
         self,
@@ -107,7 +105,7 @@ class StoryEngine:
 
         if scene_type in {"item", "heal", "buff"}:
             return self._resolve_effect_scene(scene, raw_scene, player_state)
-        
+
         if scene_type == "random_event":
             return self._resolve_random_event(scene, raw_scene, player_state)
 
@@ -131,9 +129,7 @@ class StoryEngine:
             modifier=config.get("modifier", 0),
         )
 
-        next_scene_id = (
-            config["success_scene"] if result["success"] else config["fail_scene"]
-        )
+        next_scene_id = config["success_scene"] if result["success"] else config["fail_scene"]
 
         scene["check_result"] = result
         scene["next_scene"] = next_scene_id
@@ -161,9 +157,7 @@ class StoryEngine:
             modifier=total_modifier,
         )
 
-        next_scene_id = (
-            config["success_scene"] if result["success"] else config["fail_scene"]
-        )
+        next_scene_id = config["success_scene"] if result["success"] else config["fail_scene"]
 
         scene["check_result"] = result
         scene["skill"] = skill
@@ -297,7 +291,7 @@ class StoryEngine:
                 "wisdom": 1,
             },
         }
-    
+
     def _resolve_random_event(
         self,
         scene: dict[str, Any],

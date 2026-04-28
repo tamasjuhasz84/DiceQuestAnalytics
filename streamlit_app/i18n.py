@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import streamlit as st
-
 from ui_translations import COMBAT_COLUMN_TRANSLATIONS, ITEM_TRANSLATIONS, UI_TRANSLATIONS
 
 
@@ -19,9 +18,7 @@ def t(key: str, lang: str | None = None) -> str:
     """Translate UI key with fallback: selected lang -> hu -> key."""
     selected = lang or get_current_language()
     return (
-        UI_TRANSLATIONS.get(selected, {}).get(key)
-        or UI_TRANSLATIONS.get("hu", {}).get(key)
-        or key
+        UI_TRANSLATIONS.get(selected, {}).get(key) or UI_TRANSLATIONS.get("hu", {}).get(key) or key
     )
 
 

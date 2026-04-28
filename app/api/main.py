@@ -24,6 +24,7 @@ async def lifespan(_app: FastAPI):
     init_db()
     yield
 
+
 app = FastAPI(
     title="DiceQuest Analytics API",
     description="Interactive text adventure game API",
