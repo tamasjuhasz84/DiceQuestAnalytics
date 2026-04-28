@@ -9,12 +9,6 @@ services:
       # Replace with your actual Streamlit Render URL after first deploy.
       - key: ALLOWED_ORIGINS
         value: https://dicequest-streamlit.onrender.com
-    # Persistent disk is required if you want SQLite data to survive redeploy/restart.
-    # Note: Render disks are not available on all free tiers.
-    disk:
-      name: dicequest-data
-      mountPath: /app/data
-      sizeGB: 1
 
   - type: web
     name: dicequest-streamlit

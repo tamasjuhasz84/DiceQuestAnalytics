@@ -129,7 +129,7 @@ Game events are logged for analytics into `data/dicequest.db`.
 - `sessions` stores one row per game session.
 - `events` stores gameplay events such as game start, choices, checks, combat, random events, and endings.
 
-This is an MVP persistence layer used for pandas-based analytics. When running with Docker, mount `./data` as a volume to persist the database across restarts. Without a persistent volume, the database resets on each container start — which is acceptable for portfolio/demo use.
+This is an MVP persistence layer used for pandas-based analytics. When running with Docker, mount `./data` as a volume to persist the database across restarts. Without a persistent volume, the database resets on each container start. On Render free tier, this means analytics data is temporary and may be lost after restart or redeploy, which is acceptable for portfolio/demo use but not for production persistence.
 
 ## Testing
 
@@ -222,6 +222,22 @@ The `./data` directory is mounted as a volume so the SQLite database persists be
 5. Set environment variables in Railway:
    - API service → `ALLOWED_ORIGINS=https://<your-streamlit-service>.railway.app`
    - Streamlit service → `API_BASE_URL=https://<your-api-service>.railway.app`
+
+### Render (free tier demo deployment)
+
+Render can run this project with the provided `render.yaml` blueprint, but on the free tier the API service cannot use a persistent disk.
+
+1. Push the repository to GitHub.
+2. In Render, create a new Blueprint and select the repository.
+3. Render will create two web services from `render.yaml`:
+   - `dicequest-api`
+   - `dicequest-streamlit`
+4. After the first deploy, update the service environment variables to the real public URLs:
+   - API service -> `ALLOWED_ORIGINS=https://<your-streamlit-service>.onrender.com`
+   - Streamlit service -> `API_BASE_URL=https://<your-api-service>.onrender.com`
+5. Redeploy both services after updating the URLs.
+
+Important limitation: because Render free tier does not support persistent disks for this setup, the SQLite database is ephemeral. The game works, but analytics history may be reset after redeploy, restart, or instance replacement.
 
 ### Alternative: Streamlit Community Cloud + Railway/Render
 
