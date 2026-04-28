@@ -208,4 +208,3 @@ def test_timeline_activity_no_timestamps() -> None:
 def test_timeline_activity_empty() -> None:
     result = get_timeline_activity(pd.DataFrame())
     assert result == []
-

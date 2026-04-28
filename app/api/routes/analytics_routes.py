@@ -86,16 +86,3 @@ async def analytics_timeline() -> dict[str, Any]:
     """Return daily event activity counts."""
     df = load_events_df()
     return {"items": get_timeline_activity(df)}
-
-@router.get("/dice")
-async def analytics_dice() -> dict[str, Any]:
-    """Return dice roll metrics."""
-    df = load_events_df()
-    return get_dice_stats(df)
-
-
-@router.get("/combat")
-async def analytics_combat() -> dict[str, Any]:
-    """Return combat aggregate metrics."""
-    df = load_events_df()
-    return get_combat_stats(df)

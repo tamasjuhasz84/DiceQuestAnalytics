@@ -170,14 +170,14 @@ def get_dice_stats(df: pd.DataFrame) -> dict[str, Any]:
 
     # `roll_check` stores the face value under `value`; keep `roll` as fallback for compatibility.
     checks["roll"] = checks["data"].apply(
-        lambda data: (data.get("check_result") or {}).get("value")
-        if isinstance(data, dict)
-        else None
+        lambda data: (
+            (data.get("check_result") or {}).get("value") if isinstance(data, dict) else None
+        )
     )
     checks.loc[checks["roll"].isna(), "roll"] = checks["data"].apply(
-        lambda data: (data.get("check_result") or {}).get("roll")
-        if isinstance(data, dict)
-        else None
+        lambda data: (
+            (data.get("check_result") or {}).get("roll") if isinstance(data, dict) else None
+        )
     )
     checks = checks.dropna(subset=["roll"])
 
@@ -210,7 +210,11 @@ def get_combat_stats(df: pd.DataFrame) -> dict[str, Any]:
 
     combats = df[
         (df["event_type"].isin(_COMBAT_EVENT_TYPES))
-        | (df["data"].apply(lambda data: isinstance(data, dict) and data.get("combat_result") is not None))
+        | (
+            df["data"].apply(
+                lambda data: isinstance(data, dict) and data.get("combat_result") is not None
+            )
+        )
     ].copy()
     if combats.empty:
         return {"total_combats": 0, "player_wins": 0, "win_rate": 0.0, "average_rounds": 0.0}
@@ -285,4 +289,11 @@ def get_timeline_activity(df: pd.DataFrame) -> list[dict[str, Any]]:
         .rename(columns={"size": "count"})
         .sort_values("date")
     )
-    return result.to_dict(orient="records")
+    records: list[dict[str, Any]] = [
+        {
+            "date": str(row["date"]),
+            "count": int(row["count"]),
+        }
+        for _, row in result.iterrows()
+    ]
+    return records
